@@ -1,0 +1,31 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Debug chads",
+        "type": "lldb",
+        "request": "launch",
+        "program": "${workspaceFolder}/build/src/chads",
+        "args": [],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}",
+        "environment": [
+          {
+            "name": "GSETTINGS_SCHEMA_DIR",
+            "value": "${workspaceFolder}/build/data"
+          }
+        ],
+        "externalConsole": false,
+        "MIMode": "gdb",
+        "miDebuggerPath": "gdb",
+        "setupCommands": [
+          {
+            "description": "Enable pretty-printing",
+            "text": "-enable-pretty-printing",
+            "ignoreFailures": true
+          }
+        ]
+      }
+    ]
+  }
+  

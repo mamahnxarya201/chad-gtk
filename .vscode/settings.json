@@ -1,0 +1,13 @@
+{
+  "nix.enableLanguageServer": true,
+  "nix.serverPath": "nixd",
+  "nix.serverSettings": {
+      "nixd": {
+        "formatting": {
+          "command": ["nixfmt"],
+        },
+      }
+  },
+  "mesonbuild.languageServerPath": "mesonlsp",
+  "mesonbuild.downloadLanguageServer": false,
+}

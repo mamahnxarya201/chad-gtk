@@ -1,0 +1,9 @@
+{
+    "recommendations": [
+        "mesonbuild.mesonbuild",
+        "jnoortheen.nix-ide",
+        "mkhl.direnv",
+        "llvm-vs-code-extensions.vscode-clangd",
+        "vadimcn.vscode-lldb"
+    ]
+}

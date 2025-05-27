@@ -1,0 +1,35 @@
+# Build directories
+build/
+builddir/
+
+# Nix
+.direnv/
+result
+
+# Editor
+.vscode/*
+!.vscode/launch.json
+!.vscode/tasks.json
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# Cache
+.cache/
+__pycache__/
+*.pyc
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Compiled files
+*.so
+*.a
+*.lib
+*.dll
+
+# Backup files
+*~
+*.bak
