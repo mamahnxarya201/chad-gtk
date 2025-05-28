@@ -59,6 +59,11 @@ This template comes with some fancy stuff pre-configured because I'm nice:
 - 🎨 C formatting rules (.clang-format for the OCD in you)
 - 🖼️ GTK4/libadwaita setup (GNOME approved™)
 
+> **💡 Pro tip:**
+> After you enter the dev shell, nothing gets built for you (because you're a chad who likes control).<br>
+> Want `compile_commands.json` or to actually build something? Smash that VSCode/Cursor build task button (like "Build (Meson)") and let the magic happen.<br>
+> No more surprise builds—you're the boss now.
+
 ### Daily Development Usage (3 Easy Steps!)
 
 1. Open the project in VSCode/Cursor/Whatever
