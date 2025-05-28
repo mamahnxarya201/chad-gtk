@@ -4,12 +4,31 @@
     {
       "label": "Build (Meson)",
       "type": "shell",
-      "command": "meson setup build --reconfigure --buildtype=debug && ninja -C build",
+      "command": "meson setup build --reconfigure --buildtype=debug -Db_sanitize=address,undefined && ninja -C build",
       "problemMatcher": ["$gcc"],
       "group": {
         "kind": "build",
         "isDefault": true
+      },
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": true
       }
+    },
+    {
+      "label": "Clean",
+      "type": "shell",
+      "command": "rm -rf build/",
+      "problemMatcher": []
+    },
+    {
+      "label": "Rebuild",
+      "type": "shell",
+      "command": "rm -rf build/ && meson setup build --reconfigure --buildtype=debug -Db_sanitize=address,undefined && ninja -C build",
+      "problemMatcher": ["$gcc"],
+      "group": "build"
     }
   ]
 }
