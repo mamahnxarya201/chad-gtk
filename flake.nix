@@ -41,22 +41,14 @@
         echo "🛠️ Devshell for chads loaded"
         export CC=gcc
         export CXX=g++
-        export CFLAGS="-g -O0 -fsanitize=address,undefined -fno-omit-frame-pointer"
-        export LDFLAGS="-fsanitize=address,undefined"
+        export CFLAGS="-g -O0 -fno-omit-frame-pointer"
+        export LDFLAGS=""
 
-        # Generate compile_commands.json
-        echo "🧠 Generating compile_commands.json..."
-        meson setup --reconfigure --buildtype=debug --default-library=static \
-          -Db_sanitize=address,undefined \
-          -Db_lundef=false \
-          --backend=ninja \
-          --unity=off \
-          --wipe \
-          --fatal-meson-warnings \
-          build \
+        # No automatic build. Use VSCode/Cursor tasks for building and generating compile_commands.json.
+        # All Meson/Ninja/GTK tools are available in this shell.
+        # If you need compile_commands.json, just run any build task in VSCode/Cursor.
 
-        echo "⚙️ Running ninja to build gschemas + gresource..."
-        ninja -C build
+        echo "💡 Reminder: Use VSCode/Cursor build tasks (like 'Build (Meson)') to generate compile_commands.json and build your project!"
 
         export GSETTINGS_SCHEMA_DIR=$PWD/build/data
       '';

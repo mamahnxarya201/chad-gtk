@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
       {
-        "name": "Debug chads",
+        "name": "Debug chads (LLDB/GDB)",
         "type": "lldb",
         "request": "launch",
         "program": "${workspaceFolder}/build/src/chads",
@@ -24,6 +24,86 @@
         "sourceMap": {
           ".": "${workspaceFolder}"
         }
+      },
+      {
+        "name": "Run chads (ASan)",
+        "type": "lldb",
+        "request": "launch",
+        "program": "${workspaceFolder}/build-asan/src/chads",
+        "args": [],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}",
+        "environment": [
+          {
+            "name": "GSETTINGS_SCHEMA_DIR",
+            "value": "${workspaceFolder}/build-asan/data"
+          },
+          {
+            "name": "ASAN_OPTIONS",
+            "value": "detect_leaks=1"
+          }
+        ],
+        "preLaunchTask": "Build (ASan)"
+      },
+      {
+        "name": "Run chads (TSan)",
+        "type": "lldb",
+        "request": "launch",
+        "program": "${workspaceFolder}/build-tsan/src/chads",
+        "args": [],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}",
+        "environment": [
+          {
+            "name": "GSETTINGS_SCHEMA_DIR",
+            "value": "${workspaceFolder}/build-tsan/data"
+          },
+          {
+            "name": "TSAN_OPTIONS",
+            "value": "second_deadlock_stack=1"
+          }
+        ],
+        "preLaunchTask": "Build (TSan)"
+      },
+      {
+        "name": "Run chads (UBSan)",
+        "type": "lldb",
+        "request": "launch",
+        "program": "${workspaceFolder}/build-ubsan/src/chads",
+        "args": [],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}",
+        "environment": [
+          {
+            "name": "GSETTINGS_SCHEMA_DIR",
+            "value": "${workspaceFolder}/build-ubsan/data"
+          },
+          {
+            "name": "UBSAN_OPTIONS",
+            "value": "print_stacktrace=1"
+          }
+        ],
+        "preLaunchTask": "Build (UBSan)"
+      },
+      {
+        "name": "Run chads (LSan)",
+        "type": "lldb",
+        "request": "launch",
+        "program": "${workspaceFolder}/build-lsan/src/chads",
+        "args": [],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}",
+        "environment": [
+          {
+            "name": "GSETTINGS_SCHEMA_DIR",
+            "value": "${workspaceFolder}/build-lsan/data"
+          },
+          {
+            "name": "LSAN_OPTIONS",
+            "value": "suppressions=${workspaceFolder}/.vscode/lsan.supp"
+          }
+        ],
+        "preLaunchTask": "Build (LSan)"
       }
     ]
 }

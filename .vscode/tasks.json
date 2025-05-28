@@ -4,7 +4,7 @@
     {
       "label": "Build (Meson)",
       "type": "shell",
-      "command": "meson setup build --reconfigure --buildtype=debug -Db_sanitize=address,undefined && ninja -C build",
+      "command": "meson setup build --reconfigure --buildtype=debug && ninja -C build",
       "problemMatcher": ["$gcc"],
       "group": {
         "kind": "build",
@@ -18,15 +18,113 @@
       }
     },
     {
-      "label": "Clean",
+      "label": "Build (ASan)",
       "type": "shell",
-      "command": "rm -rf build/",
+      "command": "meson setup build-asan --reconfigure --buildtype=debug -Db_sanitize=address -Db_lundef=false && ninja -C build-asan",
+      "problemMatcher": ["$gcc"],
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Run (ASan)",
+      "type": "shell",
+      "command": "ASAN_OPTIONS=detect_leaks=1 ./build-asan/src/chads",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "dependsOn": ["Build (ASan)"]
+    },
+    {
+      "label": "Build (TSan)",
+      "type": "shell",
+      "command": "meson setup build-tsan --reconfigure --buildtype=debug -Db_sanitize=thread && ninja -C build-tsan",
+      "problemMatcher": ["$gcc"],
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Run (TSan)",
+      "type": "shell",
+      "command": "TSAN_OPTIONS=second_deadlock_stack=1 ./build-tsan/src/chads",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "dependsOn": ["Build (TSan)"]
+    },
+    {
+      "label": "Build (UBSan)",
+      "type": "shell",
+      "command": "meson setup build-ubsan --reconfigure --buildtype=debug -Db_sanitize=undefined -Db_lundef=false && ninja -C build-ubsan",
+      "problemMatcher": ["$gcc"],
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Run (UBSan)",
+      "type": "shell",
+      "command": "UBSAN_OPTIONS=print_stacktrace=1 ./build-ubsan/src/chads",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "dependsOn": ["Build (UBSan)"]
+    },
+    {
+      "label": "Build (LSan)",
+      "type": "shell",
+      "command": "meson setup build-lsan --reconfigure --buildtype=debug -Db_sanitize=leak && ninja -C build-lsan",
+      "problemMatcher": ["$gcc"],
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Run (LSan)",
+      "type": "shell",
+      "command": "LSAN_OPTIONS=suppressions=${workspaceFolder}/.vscode/lsan.supp ./build-lsan/src/chads",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "dependsOn": ["Build (LSan)"]
+    },
+    {
+      "label": "Build (GDB)",
+      "type": "shell",
+      "command": "meson setup build --reconfigure --buildtype=debug && ninja -C build",
+      "problemMatcher": ["$gcc"]
+    },
+    {
+      "label": "Debug (GDB)",
+      "type": "shell",
+      "command": "gdb ./build/src/chads",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared"
+      },
+      "dependsOn": ["Build (GDB)"]
+    },
+    {
+      "label": "Clean All",
+      "type": "shell",
+      "command": "rm -rf build/ build-asan/ build-tsan/ build-ubsan/ build-lsan/",
       "problemMatcher": []
     },
     {
       "label": "Rebuild",
       "type": "shell",
-      "command": "rm -rf build/ && meson setup build --reconfigure --buildtype=debug -Db_sanitize=address,undefined && ninja -C build",
+      "command": "rm -rf build/ && meson setup build --reconfigure --buildtype=debug && ninja -C build",
       "problemMatcher": ["$gcc"],
       "group": "build"
     }
